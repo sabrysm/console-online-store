@@ -3,6 +3,8 @@ package oop.project.onlineshop.menus.impl;
 import oop.project.onlineshop.configs.ApplicationContext;
 import oop.project.onlineshop.menus.Menu;
 
+import java.util.Scanner;
+
 public class MainMenu implements Menu {
 
     public static final String MENU_COMMAND = "menu";
@@ -27,13 +29,56 @@ public class MainMenu implements Menu {
 
     @Override
     public void start() {
-        // <write your code here>
+        Scanner sc = new Scanner(System.in);
+        printMenuHeader();
+        while (true) {
+            System.out.print("Your input: ");
+            String userInput = sc.next();
+            Menu newMenu = null;
 
+            switch (userInput) {
+                case "1":
+                    newMenu = new SignUpMenu();
+                    break;
+                case "2":
+                    if (context.getLoggedInUser() == null) {
+                        newMenu = new SignInMenu();
+                    } else {
+                        newMenu = new SignOutMenu();
+                    }
+                    break;
+                case "3":
+                    newMenu = new ProductCatalogMenu();
+                    break;
+                case "4":
+                    newMenu = new MyOrdersMenu();
+                    break;
+                case "5":
+                    newMenu = new SettingsMenu();
+                    break;
+                case "6":
+                    newMenu = new CustomerListMenu();
+                    break;
+                case "exit":
+                    return;
+                default:
+                    System.out.println("Only 1, 2, 3, 4, 5, 6 is allowed. Try one more time.");
+                    continue;
+            }
+            context.setMainMenu(newMenu);
+            newMenu.start();
+            sc.close();
+            return;
+        }
     }
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        if (context.getLoggedInUser() == null) {
+            System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
+        } else {
+            System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
+        }
     }
 
 }

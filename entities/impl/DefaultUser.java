@@ -64,6 +64,14 @@ public class DefaultUser implements User {
         this.email = newEmail;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @Override
     public int getId() {
         return id;
