@@ -12,13 +12,13 @@ public class DefaultUser implements User {
 
     {
         ++defaultUserCount;
+        this.id = defaultUserCount;
     }
 
     public DefaultUser() {
     }
 
     public DefaultUser(String firstName, String lastName, String password, String email) {
-        this.id = defaultUserCount;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
