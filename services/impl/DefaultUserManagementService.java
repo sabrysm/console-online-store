@@ -10,6 +10,7 @@ public class DefaultUserManagementService implements UserManagementService {
 
     private static final String NOT_UNIQUE_EMAIL_ERROR_MESSAGE = "This email is already used by another user. Please, use another email";
     private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
+    private static final String INVALID_CREDENTIALS_MESSAGE = "Unfortunately, such login and password doesn’t exist";
     private static final String NO_ERROR_MESSAGE = "";
     private static final String USER_REGISTER_SUCCESS_MESSAGE = "New user has been created";
 
@@ -35,6 +36,15 @@ public class DefaultUserManagementService implements UserManagementService {
         ApplicationContext.getInstance().setLoggedInUser(user);
         users[nextUserIndex++] = user;
         return USER_REGISTER_SUCCESS_MESSAGE;
+    }
+
+    @Override
+    public String authenticateUser(String email, String password) {
+        if (getUserByEmail(email) == null) return INVALID_CREDENTIALS_MESSAGE;
+        User user = getUserByEmail(email);
+        if (!Objects.equals(user.getPassword(), password)) return INVALID_CREDENTIALS_MESSAGE;
+        ApplicationContext.getInstance().setLoggedInUser(user);
+        return "Glad to see you back " + user.getFirstName() + " " + user.getLastName();
     }
 
     public static UserManagementService getInstance() {

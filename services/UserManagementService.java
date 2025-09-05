@@ -6,6 +6,8 @@ public interface UserManagementService {
 
     String registerUser(User user);
 
+    String authenticateUser(String email, String password);
+
     User[] getUsers();
 
     User getUserByEmail(String userEmail);
