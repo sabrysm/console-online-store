@@ -2,7 +2,6 @@ package oop.project.onlineshop.services.impl;
 
 import oop.project.onlineshop.configs.ApplicationContext;
 import oop.project.onlineshop.entities.User;
-import oop.project.onlineshop.entities.impl.DefaultUser;
 import oop.project.onlineshop.services.UserManagementService;
 
 import java.util.Objects;
@@ -19,11 +18,11 @@ public class DefaultUserManagementService implements UserManagementService {
     private static DefaultUserManagementService instance;
 
     private User[] users;
-    private int lastUserIndex;
+    private int nextUserIndex;
 
     {
         users = new User[DEFAULT_USERS_CAPACITY];
-        lastUserIndex = 0;
+        nextUserIndex = 0;
     }
 
     private DefaultUserManagementService() {
@@ -31,8 +30,10 @@ public class DefaultUserManagementService implements UserManagementService {
 
     @Override
     public String registerUser(User user) {
+        if (getUserByEmail(user.getEmail()) != null) return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;
+        if (user.getEmail().isEmpty()) return EMPTY_EMAIL_ERROR_MESSAGE;
         ApplicationContext.getInstance().setLoggedInUser(user);
-        users[lastUserIndex++] = user;
+        users[nextUserIndex++] = user;
         return USER_REGISTER_SUCCESS_MESSAGE;
     }
 
@@ -46,12 +47,24 @@ public class DefaultUserManagementService implements UserManagementService {
 
     @Override
     public User[] getUsers() {
-        return users;
+        int actualSizeOfUsers = 0;
+        for (User user : users) {
+            if (user != null) actualSizeOfUsers++;
+        }
+        int nextInsertionIndex = 0;
+        User[] nonNullUsers = new User[actualSizeOfUsers];
+        for (User user : users) {
+            if (user != null) {
+                nonNullUsers[nextInsertionIndex++] = user;
+            }
+        }
+
+        return nonNullUsers;
     }
 
     @Override
     public User getUserByEmail(String userEmail) {
-        for (User user : users) {
+        for (User user : getUsers()) {
             if (Objects.equals(user.getEmail(), userEmail)) return user;
         }
         return null;
@@ -59,6 +72,6 @@ public class DefaultUserManagementService implements UserManagementService {
 
     void clearServiceState() {
         users = new User[0];
-        lastUserIndex = 0;
+        nextUserIndex = 0;
     }
 }
