@@ -6,6 +6,7 @@ import oop.project.onlineshop.menus.Menu;
 public class SignOutMenu implements Menu {
 
     private ApplicationContext context;
+    private static final String SIGNOUT_MESSAGE = "Have a nice day! Look forward to welcoming back!";
 
     {
         context = ApplicationContext.getInstance();
@@ -13,7 +14,11 @@ public class SignOutMenu implements Menu {
 
     @Override
     public void start() {
-        // <write your code here>
+        System.out.println(SIGNOUT_MESSAGE);
+        context.setLoggedInUser(null);
+        Menu nextMenu = new MainMenu();
+        context.setMainMenu(nextMenu);
+        nextMenu.start();
     }
 
     @Override
