@@ -67,7 +67,7 @@ public class SignUpMenu implements Menu {
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        System.out.println("*** SIGN UP ***\n");
     }
 
 }

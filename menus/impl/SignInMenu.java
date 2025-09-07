@@ -44,7 +44,7 @@ public class SignInMenu implements Menu {
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        System.out.println("*** SIGN IN ***\n");
     }
 
 }

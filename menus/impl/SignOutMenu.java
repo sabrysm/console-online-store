@@ -23,7 +23,7 @@ public class SignOutMenu implements Menu {
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        System.out.println("*** SIGN OUT ***\n");
     }
 
 }
