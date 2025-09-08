@@ -1,5 +1,5 @@
 package oop.project.onlineshop.menus.impl;
-
+import oop.project.onlineshop.Main;
 import oop.project.onlineshop.configs.ApplicationContext;
 import oop.project.onlineshop.menus.Menu;
 
@@ -59,8 +59,10 @@ public class MainMenu implements Menu {
                 case "6":
                     newMenu = new CustomerListMenu();
                     break;
-                case "exit":
+                case Main.EXIT_COMMAND:
                     return;
+                case MENU_COMMAND:
+                    break;
                 default:
                     System.out.println("Only 1, 2, 3, 4, 5, 6 is allowed. Try one more time.");
                     continue;

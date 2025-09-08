@@ -57,8 +57,7 @@ public class SignUpMenu implements Menu {
             }
         }
 
-        UserManagementService userManagementService1 = DefaultUserManagementService.getInstance();
-        System.out.println(userManagementService1.registerUser(newUser));
+        System.out.println(userManagementService.registerUser(newUser));
         Menu nextMenu = new MainMenu();
         context.setMainMenu(nextMenu);
         nextMenu.start();

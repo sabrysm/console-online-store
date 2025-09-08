@@ -34,8 +34,7 @@ public class SignInMenu implements Menu {
             password = sc.next();
         }
 
-        UserManagementService userManagementService1 = DefaultUserManagementService.getInstance();
-        System.out.println(userManagementService1.authenticateUser(email, password));
+        System.out.println(userManagementService.authenticateUser(email, password));
         Menu nextMenu = new MainMenu();
         context.setMainMenu(nextMenu);
         nextMenu.start();

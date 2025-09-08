@@ -15,6 +15,7 @@ public class SignOutMenu implements Menu {
     @Override
     public void start() {
         System.out.println(SIGNOUT_MESSAGE);
+        System.out.println(System.lineSeparator());
         context.setLoggedInUser(null);
         Menu nextMenu = new MainMenu();
         context.setMainMenu(nextMenu);
