@@ -21,7 +21,7 @@ public class DefaultProduct implements Product {
 
     @Override
     public String toString() {
-        return productName + System.lineSeparator() + id + " " + categoryName + " " + price;
+        return productName + ":\n" + id + " " + categoryName + " " + price;
     }
 
     @Override
