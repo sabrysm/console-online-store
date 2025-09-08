@@ -13,13 +13,15 @@ public class DefaultProduct implements Product {
     }
 
     public DefaultProduct(int id, String productName, String categoryName, double price) {
-        // <write your code here>
+        this.id = id;
+        this.productName = productName;
+        this.categoryName = categoryName;
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        // <write your code here>
-        return null;
+        return productName + System.lineSeparator() + id + " " + categoryName + " " + price;
     }
 
     @Override
@@ -27,10 +29,32 @@ public class DefaultProduct implements Product {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String getProductName() {
         return this.productName;
     }
 
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }
