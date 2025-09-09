@@ -49,4 +49,7 @@ public class ApplicationContext {
         return this.sessionCart;
     }
 
+    public void setSessionCart(Cart sessionCart) {
+        this.sessionCart = sessionCart;
+    }
 }
