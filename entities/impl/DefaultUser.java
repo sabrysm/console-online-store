@@ -1,5 +1,9 @@
 package oop.project.onlineshop.entities.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import oop.project.onlineshop.entities.Order;
 import oop.project.onlineshop.entities.User;
 
 public class DefaultUser implements User {
@@ -9,10 +13,12 @@ public class DefaultUser implements User {
     private String lastName;
     private String password;
     private String email;
+    private List<Order> purchases;
 
     {
         ++defaultUserCount;
         this.id = defaultUserCount;
+        this.purchases = new ArrayList<>();
     }
 
     public DefaultUser() {
@@ -23,6 +29,15 @@ public class DefaultUser implements User {
         this.lastName = lastName;
         this.password = password;
         this.email = email;
+    }
+    
+    public void recordPurchase(Order newOrder) {
+    	purchases.add(newOrder);
+    	
+    }
+    
+    public List<Order> getPurchases() {
+    	return purchases;
     }
 
     @Override
