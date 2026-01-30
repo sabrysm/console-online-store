@@ -1,9 +1,7 @@
 package oop.project.onlineshop.menus.impl;
 
 import oop.project.onlineshop.configs.ApplicationContext;
-import oop.project.onlineshop.entities.Cart;
 import oop.project.onlineshop.entities.Order;
-import oop.project.onlineshop.entities.impl.DefaultCart;
 import oop.project.onlineshop.entities.impl.DefaultOrder;
 import oop.project.onlineshop.menus.Menu;
 import oop.project.onlineshop.services.OrderManagementService;
@@ -13,8 +11,8 @@ import java.util.Scanner;
 
 public class CheckoutMenu implements Menu {
 
-    private ApplicationContext context;
-    private OrderManagementService orderManagementService;
+    private final ApplicationContext context;
+    private final OrderManagementService orderManagementService;
 
     {
         context = ApplicationContext.getInstance();
@@ -53,6 +51,7 @@ public class CheckoutMenu implements Menu {
         order.setCreditCardNumber(creditCardNumber);
         order.setCustomerId(context.getLoggedInUser().getId());
         order.setProducts(context.getSessionCart().getProducts());
+        orderManagementService.addOrder(order);
         return true;
     }
 
