@@ -34,7 +34,7 @@ public class MyOrdersMenu implements Menu {
             System.out.println(System.lineSeparator());
             printMenuHeader();
             printPurchaseList(orderManagementService.getOrdersByUserId(context.getLoggedInUser().getId()));
-            System.out.println("Your input: ");
+            System.out.print("Your input: ");
             userInput = sc.next();
 
             if (userInput.equals(MainMenu.MENU_COMMAND)) {
@@ -42,9 +42,9 @@ public class MyOrdersMenu implements Menu {
                 break;
             }
         }
-        sc.close();
         context.setMainMenu(nextMenu);
         nextMenu.start();
+        sc.close();
     }
 
     @Override

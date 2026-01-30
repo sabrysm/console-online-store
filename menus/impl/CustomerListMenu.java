@@ -8,6 +8,7 @@ import oop.project.onlineshop.services.impl.DefaultOrderManagementService;
 import oop.project.onlineshop.services.impl.DefaultUserManagementService;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class CustomerListMenu implements Menu {
 
@@ -25,6 +26,7 @@ public class CustomerListMenu implements Menu {
     public void start() {
         Menu nextMenu = new MainMenu();
         printCustomerList();
+        System.out.println(System.lineSeparator());
         context.setMainMenu(nextMenu);
         nextMenu.start();
     }
@@ -37,7 +39,8 @@ public class CustomerListMenu implements Menu {
     public void printCustomerList() {
         Arrays.stream(orderManagementService.getOrders()).map(
                 order -> userManagementService.getUserById(order.getCustomerId())
-                ).forEach(System.out::println);
+                ).collect(Collectors.toSet())
+                .forEach(customer -> System.out.printf("\n- %s <%s>", customer.getFirstName(), customer.getEmail()));
     }
 
 }

@@ -35,7 +35,7 @@ public class ProductCatalogMenu implements Menu {
     public void start() {
         Scanner sc = new Scanner(System.in);
         Menu nextMenu;
-        String userInput = null;
+        String userInput;
         Product[] products = productManagementService.getProducts();
         Cart cart = new DefaultCart();
 
@@ -44,17 +44,19 @@ public class ProductCatalogMenu implements Menu {
             printMenuHeader();
             printProductList(products);
             System.out.println(PRODUCT_CATALOG_LIST_FOR_USER);
-            System.out.println("Your input: ");
+            System.out.print("Your input: ");
             userInput = sc.next();
+            System.out.println(System.lineSeparator());
 
             if (userInput.equals(MainMenu.MENU_COMMAND)) {
                 nextMenu = new MainMenu();
                 break;
             } else if (userInput.equals(CHECKOUT_COMMAND)) {
-                if (context.getSessionCart().isEmpty()) {
+                if (cart.isEmpty()) {
                     System.out.println("Your cart is empty. Please, add product to cart first and then proceed with checkout");
                     continue;
                 }
+                context.setSessionCart(cart);
                 nextMenu = new CheckoutMenu();
                 break;
             }

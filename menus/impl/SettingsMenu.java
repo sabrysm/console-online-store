@@ -50,9 +50,9 @@ public class SettingsMenu implements Menu {
                     break;
             }
         }
-        sc.close();
         context.setMainMenu(nextMenu);
         nextMenu.start();
+        sc.close();
     }
 
     @Override

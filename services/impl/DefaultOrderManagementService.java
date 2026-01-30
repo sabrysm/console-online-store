@@ -4,6 +4,7 @@ import oop.project.onlineshop.entities.Order;
 import oop.project.onlineshop.services.OrderManagementService;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class DefaultOrderManagementService implements OrderManagementService {
 
@@ -42,11 +43,13 @@ public class DefaultOrderManagementService implements OrderManagementService {
     public Order[] getOrdersByUserId(int userId) {
         int userOrdersSize = 0;
         for (Order o : orders) {
+            if (Objects.isNull(o)) continue;
             if (o.getCustomerId() == userId) userOrdersSize++;
         }
         Order[] userOrders = new Order[userOrdersSize];
         int nextOrderIndex = 0;
         for (Order o : orders) {
+            if (Objects.isNull(o)) continue;
             if (o.getCustomerId() == userId) {
                     userOrders[nextOrderIndex++] = o;
             }

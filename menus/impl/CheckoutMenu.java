@@ -29,7 +29,6 @@ public class CheckoutMenu implements Menu {
             if (!createOrder(creditCardNumber)) {
                 continue;
             }
-            createOrder(creditCardNumber);
             break;
         }
         System.out.println(System.lineSeparator());
