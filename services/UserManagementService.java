@@ -12,4 +12,6 @@ public interface UserManagementService {
 
     User getUserByEmail(String userEmail);
 
+    User getUserById(int userId);
+
 }

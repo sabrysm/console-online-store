@@ -11,7 +11,6 @@ public class DefaultUserManagementService implements UserManagementService {
     private static final String NOT_UNIQUE_EMAIL_ERROR_MESSAGE = "This email is already used by another user. Please, use another email";
     private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
     private static final String INVALID_CREDENTIALS_MESSAGE = "Unfortunately, such login and password doesn’t exist";
-    private static final String NO_ERROR_MESSAGE = "";
     private static final String USER_REGISTER_SUCCESS_MESSAGE = "New user has been created";
 
     private static final int DEFAULT_USERS_CAPACITY = 10;
@@ -76,6 +75,14 @@ public class DefaultUserManagementService implements UserManagementService {
     public User getUserByEmail(String userEmail) {
         for (User user : getUsers()) {
             if (Objects.equals(user.getEmail(), userEmail)) return user;
+        }
+        return null;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        for (User user : getUsers()) {
+            if (Objects.equals(user.getId(), id)) return user;
         }
         return null;
     }
