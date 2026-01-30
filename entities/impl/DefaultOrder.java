@@ -15,8 +15,6 @@ public class DefaultOrder implements Order {
     private String creditCardNumber;
     private Product[] products;
     private int customerId;
-    private int orderSize = 0;
-    
     
     @Override
     public boolean isCreditCardNumberValid(String creditCardNumber) {
@@ -34,8 +32,6 @@ public class DefaultOrder implements Order {
 
     @Override
     public void setProducts(Product[] products) {
-        this.orderSize = products.length;
-        this.products = new Product[orderSize];
         this.products = Arrays.copyOf(products, products.length);
         this.orderId = ++countOrders;
     }
