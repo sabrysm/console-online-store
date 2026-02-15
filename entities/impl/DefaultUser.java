@@ -4,7 +4,7 @@ import oop.project.onlineshop.entities.User;
 
 public class DefaultUser implements User {
     private static int defaultUserCount = 0;
-    private final int id;
+    private int id;
     private String firstName;
     private String lastName;
     private String password;
@@ -19,6 +19,13 @@ public class DefaultUser implements User {
     }
 
     public DefaultUser(String firstName, String lastName, String password, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+    }
+    public DefaultUser(int id, String firstName, String lastName, String password, String email) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
