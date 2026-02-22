@@ -3,10 +3,11 @@ package oop.project.onlineshop.entities.impl;
 import oop.project.onlineshop.entities.Order;
 import oop.project.onlineshop.entities.Product;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class DefaultOrder implements Order {
+public class DefaultOrder implements Order, Serializable {
 
     private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
     private static int countOrders;

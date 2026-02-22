@@ -6,7 +6,7 @@ import oop.project.onlineshop.menus.Menu;
 import oop.project.onlineshop.services.OrderManagementService;
 import oop.project.onlineshop.services.impl.DefaultOrderManagementService;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class MyOrdersMenu implements Menu {
@@ -52,13 +52,13 @@ public class MyOrdersMenu implements Menu {
         System.out.println("*** My Orders ***\n");
     }
 
-    void printPurchaseList(Order[] purchases) {
-        if (purchases == null || purchases.length == 0) {
+    void printPurchaseList(List<Order> purchases) {
+        if (purchases == null || purchases.isEmpty()) {
             System.out.println("Unfortunately, you don’t have any orders yet. Navigate back to main menu " +
                     "to place a new order");
             return;
         }
-        Arrays.stream(purchases).forEach(System.out::println);
+        purchases.forEach(System.out::println);
     }
 
 }

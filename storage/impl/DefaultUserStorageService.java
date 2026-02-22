@@ -2,8 +2,6 @@ package oop.project.onlineshop.storage.impl;
 
 import oop.project.onlineshop.entities.User;
 import oop.project.onlineshop.entities.impl.DefaultUser;
-import oop.project.onlineshop.services.UserManagementService;
-import oop.project.onlineshop.services.impl.DefaultUserManagementService;
 import oop.project.onlineshop.storage.UserStorageService;
 
 import java.io.IOException;
@@ -38,7 +36,7 @@ public class DefaultUserStorageService implements UserStorageService {
         try {
             Files.writeString(
                     Path.of(RESOURCES_FOLDER,USERS_INFO),
-                    seqChars.stream().map(String::valueOf).collect(Collectors.joining(DELIMITER)),
+                    seqChars.stream().map(String::valueOf).collect(Collectors.joining(DELIMITER))+"\n",
                     StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND
@@ -50,7 +48,7 @@ public class DefaultUserStorageService implements UserStorageService {
 
     @Override
     public List<User> loadUsers() {
-        try (var loadedUsersStream = Files.lines(Paths.get(RESOURCES_FOLDER, USERS_INFO));) {
+        try (var loadedUsersStream = Files.lines(Paths.get(RESOURCES_FOLDER, USERS_INFO))) {
             return loadedUsersStream.filter(Objects::nonNull).filter(line->!line.isEmpty()).map(
                     line -> {
                         String[] userElements = line.split(DELIMITER);

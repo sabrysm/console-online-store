@@ -7,11 +7,10 @@ import oop.project.onlineshop.services.UserManagementService;
 import oop.project.onlineshop.services.impl.DefaultOrderManagementService;
 import oop.project.onlineshop.services.impl.DefaultUserManagementService;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class CustomerListMenu implements Menu {
-
+    private static final String NO_CUSTOMERS_YET_MESSAGE = "No Customers yet!";
     private final ApplicationContext context;
     private final UserManagementService userManagementService;
     private final OrderManagementService orderManagementService;
@@ -37,10 +36,11 @@ public class CustomerListMenu implements Menu {
     }
 
     public void printCustomerList() {
-        Arrays.stream(orderManagementService.getOrders()).map(
-                order -> userManagementService.getUserById(order.getCustomerId())
-                ).collect(Collectors.toSet())
-                .forEach(customer -> System.out.printf("\n- %s <%s>", customer.getFirstName(), customer.getEmail()));
+        if (orderManagementService.getOrders().isEmpty()) System.out.println(NO_CUSTOMERS_YET_MESSAGE);
+        orderManagementService.getOrders().stream().map(
+            order -> userManagementService.getUserById(order.getCustomerId())
+            ).collect(Collectors.toSet())
+            .forEach(customer -> System.out.printf("\n- %s <%s>", customer.getFirstName(), customer.getEmail()));
     }
 
 }
