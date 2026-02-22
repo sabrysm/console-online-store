@@ -29,6 +29,14 @@ public class DefaultUserStorageService implements UserStorageService {
 
     private static UserStorageService instance;
 
+    static {
+        try {
+            createFileIfNotExist();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void saveUser(User user) {
@@ -43,6 +51,12 @@ public class DefaultUserStorageService implements UserStorageService {
                     );
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void createFileIfNotExist() throws IOException {
+        if (!Files.exists(Path.of(RESOURCES_FOLDER, USERS_INFO))) {
+            Files.createFile(Path.of(RESOURCES_FOLDER, USERS_INFO));
         }
     }
 

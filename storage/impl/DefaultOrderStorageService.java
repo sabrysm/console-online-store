@@ -4,6 +4,9 @@ import oop.project.onlineshop.entities.Order;
 import oop.project.onlineshop.storage.OrderStorageService;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultOrderStorageService implements OrderStorageService {
@@ -13,6 +16,21 @@ public class DefaultOrderStorageService implements OrderStorageService {
 
     public DefaultOrderStorageService() {
 
+    }
+
+    static {
+        try {
+            createFileIfNotExist();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createFileIfNotExist() throws IOException {
+        Path path = Path.of(RESOURCES_FOLDER, ORDERS_INFO);
+        if (!Files.exists(path)) {
+            Files.createFile(path);
+        }
     }
 
     public static DefaultOrderStorageService getInstance() {
@@ -33,6 +51,10 @@ public class DefaultOrderStorageService implements OrderStorageService {
 
     @Override
     public List<Order> loadOrders() {
+        File file = new File(RESOURCES_FOLDER + File.separator + ORDERS_INFO);
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
         try (var ois = new ObjectInputStream(new FileInputStream(RESOURCES_FOLDER + File.separator + ORDERS_INFO))) {
             return (List<Order>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
