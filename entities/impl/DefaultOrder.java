@@ -3,18 +3,21 @@ package oop.project.onlineshop.entities.impl;
 import oop.project.onlineshop.entities.Order;
 import oop.project.onlineshop.entities.Product;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
-public class DefaultOrder implements Order, Serializable {
+public class DefaultOrder implements Order {
 
     private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
-    private static int countOrders;
     private int orderId;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private String creditCardNumber;
-    private Product[] products;
+    private List<Product> products;
     private int customerId;
     
     @Override
@@ -32,9 +35,8 @@ public class DefaultOrder implements Order, Serializable {
     }
 
     @Override
-    public void setProducts(Product[] products) {
-        this.products = Arrays.copyOf(products, products.length);
-        this.orderId = ++countOrders;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class DefaultOrder implements Order, Serializable {
     @Override
     public String toString() {
         return "Order #" + orderId + "\n" +
-                String.join("\n-", Arrays.stream(products).filter(Objects::nonNull).map(Product::getProductName).toList());
+                String.join("\n-", products.stream().filter(Objects::nonNull).map(Product::getProductName).toList());
     }
 }
 

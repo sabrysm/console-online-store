@@ -2,6 +2,8 @@ package oop.project.onlineshop.entities.impl;
 
 import oop.project.onlineshop.entities.Product;
 
+import java.io.Serializable;
+
 public class DefaultProduct implements Product {
 
     private int id;

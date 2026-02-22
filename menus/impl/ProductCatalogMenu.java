@@ -11,6 +11,7 @@ import oop.project.onlineshop.services.UserManagementService;
 import oop.project.onlineshop.services.impl.DefaultProductManagementService;
 import oop.project.onlineshop.services.impl.DefaultUserManagementService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ProductCatalogMenu implements Menu {
@@ -25,7 +26,7 @@ public class ProductCatalogMenu implements Menu {
         productManagementService = DefaultProductManagementService.getInstance();
     }
 
-    public void printProductList(Product[] products) {
+    public void printProductList(List<Product> products) {
         for (Product p : products) {
             System.out.println(p + System.lineSeparator());
         }
@@ -36,7 +37,7 @@ public class ProductCatalogMenu implements Menu {
         Scanner sc = new Scanner(System.in);
         Menu nextMenu;
         String userInput;
-        Product[] products = productManagementService.getProducts();
+        List<Product> products = productManagementService.getProducts();
         Cart cart = new DefaultCart();
 
         while (true) {

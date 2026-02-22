@@ -5,6 +5,7 @@ import oop.project.onlineshop.services.OrderManagementService;
 import oop.project.onlineshop.storage.OrderStorageService;
 import oop.project.onlineshop.storage.impl.DefaultOrderStorageService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ public class DefaultOrderManagementService implements OrderManagementService {
 
     @Override
     public List<Order> getOrdersByUserId(int userId) {
+        if (orders == null || orders.isEmpty()) return new ArrayList<>();
         return orders.stream()
                 .filter(Objects::nonNull)
                 .filter(order -> order.getCustomerId() == userId)
