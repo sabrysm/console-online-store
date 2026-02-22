@@ -24,12 +24,12 @@ public class DefaultUser implements User {
         this.password = password;
         this.email = email;
     }
-    public DefaultUser(int id, String firstName, String lastName, String password, String email) {
+    public DefaultUser(int id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.email = email;
+        this.password = password;
     }
 
     @Override
@@ -82,5 +82,9 @@ public class DefaultUser implements User {
     @Override
     public int getId() {
         return id;
+    }
+
+    public static void setCounter(int newCount) {
+        defaultUserCount = newCount;
     }
 }
